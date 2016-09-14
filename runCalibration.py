@@ -5,7 +5,7 @@ Created on Tue Sep 13 16:06:16 2016
 @author: Joanne
 """
 
-import HBV96
+import HBV96 as hbv
 import numpy as np
 import matplotlib.pyplot as plt
 
@@ -16,14 +16,14 @@ et = data[:,1]
 qt = data[:, 3]
 
 #set temperature and non-calibration parameters p2[timestepFactor, area]
-temp = -20.0*np.ones_like(rt)
+temp = 20.0*np.ones_like(rt)
 p2=[1.0, 135.0]
 
 #run calibration
-par, nse = HBV96.calibrate(qt, rt, temp, et, p2, verbose='TRUE', obj_fun='NSE')
+par, nse = hbv.calibrate(qt, rt, temp, et, p2, verbose='TRUE', obj_fun='NSE')
 
 #run simulation for calibrated parameters
-q, st = HBV96.simulate(rt, temp, et, par, p2)
+q, st = hbv.simulate(rt, temp, et, par, p2)
 
 #display results
 plt.plot(q)
